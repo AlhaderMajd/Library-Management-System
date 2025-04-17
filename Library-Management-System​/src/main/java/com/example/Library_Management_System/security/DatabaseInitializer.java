@@ -60,23 +60,23 @@ public class DatabaseInitializer implements CommandLineRunner {
             author.setPassword("author123");
 
             // Get the ADMIN role from repository
-            Role authorRole = roleRepository.findByName(RoleType.AUTHOR)
+            Role adminRole = roleRepository.findByName(RoleType.AUTHOR)
                     .orElseThrow(() -> new RuntimeException("AUTHOR role not found"));
 
-            author.setRole(authorRole);
+            author.setRole(adminRole);
             userRepository.save(author);
         }
         if (userRepository.findByName("member") == null) {
-            User member = new User();
-            member.setName("member");
-            member.setPassword("member123");
+            User author = new User();
+            author.setName("member");
+            author.setPassword("author123");
 
             // Get the ADMIN role from repository
-            Role memberRole = roleRepository.findByName(RoleType.MEMBER)
-                    .orElseThrow(() -> new RuntimeException("MEMBER role not found"));
+            Role adminRole = roleRepository.findByName(RoleType.MEMBER)
+                    .orElseThrow(() -> new RuntimeException("AUTHOR role not found"));
 
-            member.setRole(memberRole);
-            userRepository.save(member);
+            author.setRole(adminRole);
+            userRepository.save(author);
         }
     }
 }
